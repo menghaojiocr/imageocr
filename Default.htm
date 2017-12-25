@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <style type="text/css" title="">
+        body { margin: 10 0; padding: 10px; color: #000; background-color: #FFF; }
+        body, td, p, input, textarea, select { font-size: 12px; line-height: 150%; font-family: Arial, Helvetica, sans-serif; }
+        .att { color: #F00; }
+        a img { border: 0; }
+        form, ul, ol { margin: 0; padding: 0; }
+        h3 { background-color: #666666; color: #FFFFFF; font-size: 24px; font-weight: bolder; padding: 15px; }
+        pre { font-family: Courier New; }
+        pre.js { background-color: #FFFFEE; border: 1px solid #AA9966; }
+        pre span { font-weight: bolder; background-color: #0088FF; padding: 0 10px; color: #FFFFFF; display: block; }
+        pre.csharp { background-color: #EEFFFF; border: 1px solid #6699AA; }
+    </style>
+    <title>WebBrowser控件上的网页与Winform本身的交互</title>
+    <script language="javascript" type="text/javascript">
+        function funJS(para) {
+            alert("Web端的JavaScript函数funJS2()调用成功。\n\npara = " + para);
+        }
+
+        function funJS2() {
+            alert("第一步：Web端的JavaScript函数funJS2()调用成功。\n\n该步骤由Html标签 onclick=\"\" 调用 ");
+        }
+
+        function funChanging(obj) {
+            document.getElementById("onchangingTestArea_Web").innerHTML = obj.value;
+        }
+    </script>
+</head>
+<body>
+    <h1>WebBrowser控件上的网页与Winform本身的交互</h1>
+    <p>
+        本页面旨在演示WebBrowser控件上的代码（Javascript、Html Dom）与Winform控件本身的交互，实现在WebBrowser的C/S程序中调用其网页上的Javascript函数，甚至反过来在网页的Javascript代码中调用C/S程序中的方法。</p>
+    <p>
+        以下示例点到为止，比如“B/S Dom对象的事件”示例中，除了用onchange/onpropertychange之外，其他任何支持的html事件均能使用，如onclick、onkeydown等等。
+        例子中没有详细列出可以应用的方式和使用范围，但我们加以思考，触类旁通，可以实现很多很多功能的。</p>
+    <p>
+        说明：<a href="http://udnz.com/Article/Invoke_Javascript_On_Webbrowser_In_Winform.aspx" target="_blank">http://udnz.com/Article/Invoke_Javascript_On_Webbrowser_In_Winform.aspx</a><br />
+        更多作品请见：<a href="http://udnz.com/Works/" target="_blank">http://udnz.com/Works/</a></p>
+    <h3>C# 中调用 网页上的 Javascript 函数</h3>
+    <pre class="csharp"><span>C# 代码</span>
+        webBrowser1.Document.InvokeScript("funJS", new object[] { tbPara1.Text });  //tbPara1 是C/S控件
+    </pre>
+    <input type="button" value="网页自身调用 JavaScript 函数 funJS(a)" onclick="funJS(new Date());" />
+    <h3>B/S调用C/S方法</h3>
+    <p>
+        实际上，这个实现方式并不是“调用”，而仅仅是通过“响应”进行回调。</p>
+    <pre class="csharp"><span>C# 代码</span>
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            webBrowser1.Document.GetElementById("funCSharp").Click += new HtmlElementEventHandler(funCSharp_Click);
+
+        }
+
+        void funCSharp_Click(object sender, HtmlElementEventArgs e)
+        {
+            string funCSharp_para = webBrowser1.Document.GetElementById("funCSharp_para").GetAttribute("value");
+            MessageBox.Show("第二步：C#方法被调用\n\nfunCSharp_para = " + funCSharp_para, "C#方法被触发,C/S对话框");
+        }
+    </pre>
+    <input type="button" value="点击此按钮，将会调用C/S方法" id="funCSharp" name="funCSharp" onclick="funJS2();" />，
+    参数：<input type="text" id="funCSharp_para" value="abcd" />
+    （准确地讲，这个参数是由C/S端主动从WebBrowser获取的，而不是传入的）<br />
+    <h3>B/S Dom对象的事件：</h3>
+    <p>
+        这个实现过程其本质与上例相同。除了用onchange/onpropertychange之外，其他任何支持的html事件均能使用，如onclick、onkeydown等等；除了
+        textarea 之外，其他Dom对象也同样适用，本例中点到为止。</p>
+    <pre class="csharp"><span>C# 代码</span>
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            //使用onchange也可以，只不过相比onpropertychange而言，onchange只能在文本框失去焦点后方能触发，这一点完全相同于Html标签指定的事件
+            webBrowser1.Document.GetElementById("onchangingTestArea").AttachEventHandler("onpropertychange", new EventHandler(textbox_Change));
+        }
+        void textbox_Change(object sender, EventArgs e) {
+            this.tbChanging.Text = webBrowser1.Document.GetElementById("onchangingTestArea").InnerHtml;
+        }
+    </pre>
+    <textarea id="onchangingTestArea" rows="5" cols="70" onpropertychange="funChanging(this)">修改这里的文字，会响应到C/S端的文本框</textarea>
+    <br />
+    <strong>Dom对象的事件可以同时响应到本地和C/S端：</strong>
+    <div id="onchangingTestArea_Web">
+    </div>
+    <h3>获取Javascript变量</h3>
+    <script language="javascript" type="text/javascript">
+        var jsVar = 1;
+
+        var jsJSON = { Name: "ObjectName", Value: "ObjectValue" };
+
+        var Obj = function() {
+            this.Key = "ObjKey";
+            this.Value = "ObjValue";
+        }
+
+        Obj.prototype.MyMethod = function(para) {
+            alert("执行Javascript对象的方法成功！\n\n传入参数为：" + para);
+            this.Value = para;
+            return "this.Key = " + this.Key + ", this.Value = " + this.Value;
+        }
+
+        var jsobj = new Obj();
+
+        function GetJsVar() {
+            return jsVar;
+        }
+        function GetJSON() {
+            return jsJSON;
+        }
+        function GetJsObj() {
+            return jsobj;
+        }
+    </script>
+    <ol>
+        <li>简单变量
+            <pre class="js"><span>Javascript 代码</span>
+    var jsVar = 1;
+    </pre>
+        </li>
+        <li>JSON对象
+            <pre class="js"><span>Javascript 代码</span>
+    var jsJSON = { Name: "ObjectName", Value: "ObjectValue" };
+    </pre>
+        </li>
+        <li>Javascript对象及其实例方法
+            <pre class="js"><span>Javascript 代码</span>
+    var Obj = function() {
+        this.Key = "ObjKey";
+        this.Value = "ObjValue";
+    }
+    
+    var jsobj = new Obj();
+    </pre>
+        </li>
+    </ol>
+    <pre class="csharp"><span>C# 代码</span>
+    object tmp = webBrowser1.Document.InvokeScript("GetJSON");
+    if (tmp != null)
+    {
+        Type t = tmp.GetType();
+        object name = t.InvokeMember("Name", System.Reflection.BindingFlags.GetProperty, null, tmp, null);
+        object value = t.InvokeMember("Value", System.Reflection.BindingFlags.GetProperty, null, tmp, null);
+        MessageBox.Show(string.Format("jsJSON = {0}\n\njsJSON.Name = {1}\njsJSON.Value = {2}", tmp, name ?? "[NULL]", value ?? "[NULL]"), "C/S对话框");
+    }
+    else
+        MessageBox.Show("未找到对象");
+    </pre>
+    <h3>调用Javascript对象的实例方法</h3>
+    <p>
+        继续使用上文的Obj对象，并实现如下方法</p>
+    <pre class="js"><span>Javascript 代码</span>
+    Obj.prototype.MyMethod = function(para) {
+        alert("执行Javascript对象的方法成功！\n\n传入参数为：" + para);
+        this.Value = para;
+        return "this.Key = " + this.Key + ", this.Value = " + this.Value;
+    }
+    </pre>
+    <pre class="csharp"><span>C# 代码</span>
+    object tmp = webBrowser1.Document.InvokeScript("GetJsObj");
+    if (tmp != null)
+    {
+        Type t = tmp.GetType();
+        object result = t.InvokeMember("MyMethod", System.Reflection.BindingFlags.InvokeMethod, null, tmp, new object[] { tbPara2.Text });  //tbPara2 是C/S文本框
+        MessageBox.Show(string.Format("jsobj.MyMethod(para) 返回了：\n\n{0}", result ?? "[NULL]"), "C/S对话框");
+    }
+    else
+        MessageBox.Show("未找到对象");
+    </pre>
+    <h3>ActiveX控件</h3>
+    <p>
+        此处以Flash为例，若没有显示Flash，请设置IE安全选项</p>
+    <p>
+        <input type="button" value="点击此按钮，以网页方式获取Flash的尺寸" id="Button1" name="funCSharp"
+            onclick="alert('Width = '+flashPlayer.width+', Height = '+flashPlayer.height);" /></p>
+    <div>
+        <object id="flashPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="400"
+            height="300">
+            <param name="movie" value="flash.swf" />
+            <param name="quality" value="high" />
+            <param name="wmode" value="opaque" />
+        </object>
+    </div>
+</body>
+</html>

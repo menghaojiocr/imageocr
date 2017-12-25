@@ -1,0 +1,33 @@
+E:\PrivateWorks\Communicate With WebBrowser\Communicate With WebBrowser\bin\Debug\Communicate With WebBrowser.exe
+E:\PrivateWorks\Communicate With WebBrowser\Communicate With WebBrowser\bin\Debug\Communicate With WebBrowser.pdb
+E:\PrivateWorks\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\ResolveAssemblyReference.cache
+E:\PrivateWorks\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate_With_WebBrowser.FDemo.resources
+E:\PrivateWorks\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate_With_WebBrowser.Properties.Resources.resources
+E:\PrivateWorks\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.csproj.GenerateResource.Cache
+E:\PrivateWorks\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.exe
+E:\PrivateWorks\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.pdb
+G:\Works\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.exe
+G:\Works\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.pdb
+G:\Works\Communicate With WebBrowser\Communicate With WebBrowser\bin\Debug\Communicate With WebBrowser.exe
+G:\Works\Communicate With WebBrowser\Communicate With WebBrowser\bin\Debug\Communicate With WebBrowser.pdb
+G:\Works\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\ResolveAssemblyReference.cache
+G:\Works\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate_With_WebBrowser.FDemo.resources
+G:\Works\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate_With_WebBrowser.Properties.Resources.resources
+G:\Works\Communicate With WebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.csproj.GenerateResource.Cache
+C:\Users\Administrator\Downloads\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\bin\Debug\Communicate With WebBrowser.exe
+C:\Users\Administrator\Downloads\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\bin\Debug\Communicate With WebBrowser.pdb
+C:\Users\Administrator\Downloads\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate_With_WebBrowser.FDemo.resources
+C:\Users\Administrator\Downloads\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate_With_WebBrowser.Properties.Resources.resources
+C:\Users\Administrator\Downloads\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.csproj.GenerateResource.Cache
+C:\Users\Administrator\Downloads\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.exe
+C:\Users\Administrator\Downloads\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.pdb
+D:\work\c#pai\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\bin\Debug\Communicate With WebBrowser.exe
+D:\work\c#pai\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\bin\Debug\Communicate With WebBrowser.pdb
+D:\work\c#pai\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.csprojResolveAssemblyReference.cache
+D:\work\c#pai\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate_With_WebBrowser.FDemo.resources
+D:\work\c#pai\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate_With_WebBrowser.Properties.Resources.resources
+D:\work\c#pai\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.csproj.GenerateResource.Cache
+D:\work\c#pai\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.csproj.CoreCompileInputs.cache
+D:\work\c#pai\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.exe
+D:\work\c#pai\好例子网_CommunicateWithWebBrowser\Communicate With WebBrowser\obj\Debug\Communicate With WebBrowser.pdb
